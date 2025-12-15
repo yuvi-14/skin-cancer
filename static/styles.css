@@ -128,3 +128,36 @@ pre {
   color: #333;
   border: 1px solid #ddd;
 }
+
+/* --- Disclaimer Footer Styling --- */
+.disclaimer {
+  margin-top: 30px;
+  padding-top: 15px;      
+  border-top: 1px solid #eee; 
+  font-size: 13px;        
+  color: #666;            
+  text-align: center;    
+  line-height: 1.5;     
+}
+
+@media (max-width: 600px) {
+  
+
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .disclaimer {
+    font-size: 11px;
+    margin-top: 20px;
+  }
+}
