@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prediction Result</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>🔍 Prediction Result</h1>
+
+    <div class="result-section">
+      <h3>Uploaded Image:</h3>
+      <img src="{{ image_url }}" class="preview-img">
+    </div>
+
+    <div class="result-section">
+      <h3>Predicted Class:</h3>
+      <p class="highlight">{{ pred }}</p>
+
+      <h3>Confidence:</h3>
+      <p>{{ confidence }}</p>
+    </div>
+
+    <div class="result-section">
+      <h3>Training Graphs:</h3>
+
+
+      {% if loss_plot %}
+        <img src="{{ url_for('static', filename='plots/' + loss_plot) }}" class="plot-img">
+      {% endif %}
+
+      {% if acc_plot %}
+        <img src="{{ url_for('static', filename='plots/' + acc_plot) }}" class="plot-img">
+      {% endif %}
+
+    </div>
+
+    <a href="/" class="btn">Back to Home</a>
+  </div>
+</body>
+</html>

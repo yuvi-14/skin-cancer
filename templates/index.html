@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Skin Cancer Classifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🩺 Skin Cancer Classifier</h1>
+
+    <form method="post" action="/predict" enctype="multipart/form-data" id="uploadForm">
+      <div id="dropZone">
+        <p>📸 Drag & Drop image here<br>or<br><strong>Click to Select</strong></p>
+        <input type="file" name="file" accept="image/*" id="fileInput">
+      </div>
+      <button type="submit">🔍 Predict</button>
+    </form>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="/metrics" class="btn btn-secondary">
+            📊 View Model Accuracy & Metrics
+        </a>
+    </div>
+    <div id="previewContainer" style="display:none;">
+      <h3>Uploaded Image:</h3>
+      <img id="previewImage" src="#" alt="Preview">
+    </div>
+  </div>
+
+<script>
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const previewImage = document.getElementById('previewImage');
+  const previewContainer = document.getElementById('previewContainer');
+
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+  });
+
+  dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('dragover');
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    fileInput.files = e.dataTransfer.files;
+    showPreview(fileInput.files[0]);
+  });
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+      showPreview(fileInput.files[0]);
+    }
+  });
+
+  function showPreview(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      previewImage.src = e.target.result;
+      previewContainer.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+</body>
+</html>
